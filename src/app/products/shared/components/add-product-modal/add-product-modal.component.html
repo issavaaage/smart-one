@@ -1,0 +1,44 @@
+<div class="card" [formGroup]="form">
+  <div class="field">
+    <label for="title">Title:</label>
+    <input id="title"
+           type="text"
+           formControlName="title"
+           class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+  </div>
+  <div class="field">
+    <label for="price">Price:</label>
+    <input id="price"
+           type="number"
+           formControlName="price"
+           class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+  </div>
+  <div class="field">
+    <label for="brand">Brand:</label>
+    <input id="brand"
+           type="text"
+           formControlName="brand"
+           class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+  </div>
+  <div class="field">
+    <label for="category">Category:</label>
+    <input id="category"
+           type="text"
+           formControlName="category"
+           class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+  </div>
+  <div class="field">
+    <label for="description">Description:</label>
+    <textarea id="description"
+              type="text"
+              rows="4"
+              formControlName="description"
+              class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full"
+              style="resize: none"></textarea>
+  </div>
+  <div class="flex">
+    <p-button [label]="config.data!.editButtonName"
+              [disabled]="!form.valid"
+              (click)="submit()"></p-button>
+  </div>
+</div>

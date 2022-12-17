@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiUrl: 'https://backend-for-applicants.smartoneclub.com',
+  imagesPath: 'https://backend-for-applicants.smartoneclub.com'
 };
 
 /*

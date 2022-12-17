@@ -1,0 +1,61 @@
+<div class="flex mb-4">
+  <p-button label="Product"
+            class="ml-auto"
+            icon="pi pi-plus"
+            iconPos="left"
+            (click)="onAddProduct()"></p-button>
+</div>
+<ng-container *ngIf="(products$ | async) as products">
+  <p-table [value]="products">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th style="max-width: 150px">Description</th>
+        <th>Price, $</th>
+        <th>Selected</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr>
+        <td>
+          <img src="{{product.image | imagespath}}" style="max-width: 50px" alt="">
+        </td>
+        <td>{{product.title}}</td>
+        <td class="white-space-nowrap overflow-hidden text-overflow-ellipsis"
+            style="max-width: 150px">{{product.description}}</td>
+        <td>{{product.price}}</td>
+        <td>
+          <p-checkbox name="selectedProducts" [value]="product.id" [(ngModel)]="selectedProducts"></p-checkbox>
+        </td>
+        <td>
+          <p-overlayPanel #op>
+            <ng-template pTemplate>
+              <p-button label="Edit"
+                        icon="pi pi-file-edit"
+                        class="mr-2"
+                        (click)="onEditProduct(product)"></p-button>
+              <p-button label="Change icon"
+                        icon="pi pi-file-edit"
+                        styleClass="p-button-warning"
+                        class="mr-2"
+                        (click)="onChangeIcon(product)"></p-button>
+              <p-button label="Delete"
+                        icon="pi pi-trash"
+                        styleClass="p-button-danger"
+                        (click)="onDeleteProduct(product.id)"></p-button>
+              <p-confirmDialog header="Delete"
+                               icon="pi pi-exclamation-triangle"
+                               appendTo="body"></p-confirmDialog>
+            </ng-template>
+          </p-overlayPanel>
+
+          <p-button icon="pi pi-ellipsis-v"
+                    styleClass="p-button-text"
+                    (click)="op.toggle($event)"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-container>

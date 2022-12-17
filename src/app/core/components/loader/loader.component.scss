@@ -1,0 +1,9 @@
+::ng-deep {
+  .disabled-loader-styles {
+    box-shadow: none;
+
+    .p-dialog-content {
+      background: none;
+    }
+  }
+}

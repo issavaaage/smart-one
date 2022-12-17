@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="field">
+    <div class="custom-image-preview">
+      <img class="" src="{{src}}" alt="" *ngIf="isShowImage; else empty">
+      <ng-template #empty>
+        <div class="image-placeholder"></div>
+      </ng-template>
+    </div>
+  </div>
+  <div class="field flex justify-content-center">
+    <p-button label="Edit"
+              icon="pi pi-file-edit"
+              [disabled]="!isShowImage"
+              class="mr-2"></p-button>
+    <p-fileUpload name="myfile[]"
+                  [customUpload]="true"
+                  [showCancelButton]="false"
+                  [showUploadButton]="false"
+                  styleClass="custom-file-upload"
+                  (onSelect)="onSelectFile($event)"></p-fileUpload>
+  </div>
+</div>
