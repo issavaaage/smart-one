@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProductsAllComponent } from './products-all.component';
+import {ProductsAllComponent} from './products-all.component';
 
 describe('ProductsAllComponent', () => {
   let component: ProductsAllComponent;
@@ -8,9 +8,8 @@ describe('ProductsAllComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProductsAllComponent ]
-    })
-    .compileComponents();
+      declarations: [ProductsAllComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ProductsAllComponent);
     component = fixture.componentInstance;

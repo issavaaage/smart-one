@@ -1,25 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import {ImagesPathPipe} from "./pipes/images-path.pipe";
-import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
-
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ImagesPathPipe} from './pipes/images-path.pipe';
+import {DialogService, DynamicDialogModule} from 'primeng/dynamicdialog';
 
 @NgModule({
-  declarations: [
-    ImagesPathPipe
-  ],
-  imports: [
-    CommonModule,
-    DynamicDialogModule
-  ],
-  exports: [
-    ImagesPathPipe,
-    DynamicDialogModule
-  ],
-  providers: [
-    DialogService,
-    ImagesPathPipe
-  ]
+  declarations: [ImagesPathPipe],
+  imports: [CommonModule, DynamicDialogModule],
+  exports: [ImagesPathPipe, DynamicDialogModule],
+  providers: [DialogService, ImagesPathPipe],
 })
-export class SharedModule { }
+export class SharedModule {}

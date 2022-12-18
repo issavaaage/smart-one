@@ -1,25 +1,29 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {IProduct} from "../../interfaces/product.interface";
-import {IProductModalForm} from "../../interfaces/product-modal-form.interface";
-import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {IProduct} from '../../interfaces/product.interface';
+import {IProductModalForm} from '../../interfaces/product-modal-form.interface';
+import {DynamicDialogConfig, DynamicDialogRef} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-add-product-modal',
   templateUrl: './add-product-modal.component.html',
   styleUrls: ['./add-product-modal.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddProductModalComponent implements OnInit {
-
   form: FormGroup<IProductModalForm>;
 
-  constructor(private fb: FormBuilder,
-              public ref: DynamicDialogRef,
-              public config: DynamicDialogConfig<{product?: IProduct, editButtonName: string}>) { }
+  constructor(
+    private fb: FormBuilder,
+    public ref: DynamicDialogRef,
+    public config: DynamicDialogConfig<{
+      product?: IProduct;
+      editButtonName: string;
+    }>
+  ) {}
 
   ngOnInit(): void {
-    this.initForm()
+    this.initForm();
   }
 
   private initForm() {
@@ -28,19 +32,22 @@ export class AddProductModalComponent implements OnInit {
       price: this.fb.control(null, [Validators.required, Validators.min(1)]),
       brand: this.fb.control(null, [Validators.required]),
       category: this.fb.control(null, [Validators.required]),
-      description: this.fb.control(null, [Validators.required])
+      description: this.fb.control(null, [Validators.required]),
     });
-    if(this.config.data?.product) this.form.patchValue(this.config.data?.product);
+    if (this.config.data?.product)
+      this.form.patchValue(this.config.data?.product);
   }
 
   submit() {
     this.form.markAllAsTouched();
-    if(this.form.valid) this.ref.close(this.form.value);
+    if (this.form.valid) this.ref.close(this.form.value);
   }
 
   get isErrorShown() {
-    return !this.form.valid &&
-      Object.keys(this.form.controls).filter(key => this.form.get(key)?.touched).length
-      === Object.keys(this.form.controls).length;
+    return (
+      !this.form.valid &&
+      Object.keys(this.form.controls).filter(key => this.form.get(key)?.touched)
+        .length === Object.keys(this.form.controls).length
+    );
   }
 }

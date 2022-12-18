@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { AddProductModalComponent } from './add-product-modal.component';
+import {AddProductModalComponent} from './add-product-modal.component';
 
 describe('AddProductModalComponent', () => {
   let component: AddProductModalComponent;
@@ -8,9 +8,8 @@ describe('AddProductModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddProductModalComponent ]
-    })
-    .compileComponents();
+      declarations: [AddProductModalComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(AddProductModalComponent);
     component = fixture.componentInstance;

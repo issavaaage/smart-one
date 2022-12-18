@@ -1,5 +1,4 @@
 :host {
-
   .container {
     padding: 0 30px;
 
@@ -18,7 +17,6 @@
 }
 
 ::ng-deep {
-
   .custom-table {
     border: 1px solid #dee2e6;
     border-radius: 6px;
@@ -26,7 +24,7 @@
 
     tr {
       th {
-        background-color: #EFF6FF!important;
+        background-color: #eff6ff !important;
       }
     }
 
@@ -41,17 +39,16 @@
 
     a {
       outline: 1px solid #dee2e6;
-      border-radius: 6px!important;
-      margin-bottom: 8px!important;
+      border-radius: 6px !important;
+      margin-bottom: 8px !important;
 
       &:hover {
-        background-color: rgba(#e9ecef, 0.3)!important;
+        background-color: rgba(#e9ecef, 0.3) !important;
       }
     }
   }
 
   .custom-add-product-modal {
-
     .p-dialog-header {
       padding: 1.5rem 2rem;
     }

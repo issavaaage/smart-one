@@ -1,22 +1,26 @@
 <div class="card">
   <div class="field">
     <div class="custom-image-preview">
-      <img class="" src="{{src}}" alt="" *ngIf="isShowImage">
+      <img class="" src="{{ src }}" alt="" *ngIf="isShowImage" />
     </div>
   </div>
   <div class="field flex justify-content-center mt-4 mb-2">
-    <p-button label="Edit"
-              icon="pi pi-file-edit"
-              [disabled]="isSubmitDisabled"
-              (click)="submit()"
-              styleClass="p-button-sm w-7rem"
-              class="mr-2"></p-button>
-    <p-fileUpload name="myfile[]"
-                  [chooseStyleClass]="'p-button-sm w-7rem'"
-                  [customUpload]="true"
-                  [showCancelButton]="false"
-                  [showUploadButton]="false"
-                  styleClass="custom-file-upload"
-                  (onSelect)="onSelectFile($event)"></p-fileUpload>
+    <p-button
+      label="Edit"
+      icon="pi pi-file-edit"
+      [disabled]="isSubmitDisabled"
+      (click)="submit()"
+      styleClass="p-button-sm w-7rem"
+      class="mr-2"
+    ></p-button>
+    <p-fileUpload
+      name="myfile[]"
+      [chooseStyleClass]="'p-button-sm w-7rem'"
+      [customUpload]="true"
+      [showCancelButton]="false"
+      [showUploadButton]="false"
+      styleClass="custom-file-upload"
+      (onSelect)="onSelectFile($event)"
+    ></p-fileUpload>
   </div>
 </div>

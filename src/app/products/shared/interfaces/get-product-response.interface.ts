@@ -1,5 +1,5 @@
-import {IProduct} from "./product.interface";
+import {IProduct} from './product.interface';
 
 export interface IGetProductResponse {
-  product: IProduct
+  product: IProduct;
 }

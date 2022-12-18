@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ChangeIconModalComponent } from './change-icon-modal.component';
+import {ChangeIconModalComponent} from './change-icon-modal.component';
 
 describe('ChangeIconModalComponent', () => {
   let component: ChangeIconModalComponent;
@@ -8,9 +8,8 @@ describe('ChangeIconModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChangeIconModalComponent ]
-    })
-    .compileComponents();
+      declarations: [ChangeIconModalComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ChangeIconModalComponent);
     component = fixture.componentInstance;

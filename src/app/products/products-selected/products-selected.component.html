@@ -1,20 +1,24 @@
-<ng-container *ngIf="(products$ | async) as products">
-  <p-table [value]="products"
-           [paginator]="true"
-           [rows]="5"
-           [rowsPerPageOptions]="rowsPerPageOptions"
-           [totalRecords]="products.length"
-           styleClass="custom-table"
-           pAnimate
-           enterClass="fadein"
-           class="animation-duration-500">
+<ng-container *ngIf="products$ | async as products">
+  <p-table
+    [value]="products"
+    [paginator]="true"
+    [rows]="5"
+    [rowsPerPageOptions]="rowsPerPageOptions"
+    [totalRecords]="products.length"
+    styleClass="custom-table"
+    pAnimate
+    enterClass="fadein"
+    class="animation-duration-500"
+  >
     <ng-template pTemplate="header">
       <tr>
         <th>Image</th>
         <ng-container *ngFor="let col of sortCols">
-          <th [style.max-w-10rem]="col.field === 'description'"
-              [pSortableColumn]="col.field">
-            {{col.header}}
+          <th
+            [style.max-w-10rem]="col.field === 'description'"
+            [pSortableColumn]="col.field"
+          >
+            {{ col.header }}
             <p-sortIcon [field]="col.field"></p-sortIcon>
           </th>
         </ng-container>
@@ -24,22 +28,34 @@
     <ng-template pTemplate="body" let-product>
       <tr>
         <td>
-          <img src="{{product.image | imagespath}}" style="max-width: 50px" alt="">
+          <img
+            src="{{ product.image | imagespath }}"
+            style="max-width: 50px"
+            alt=""
+          />
         </td>
-        <td>{{product.title}}</td>
-        <td class="white-space-nowrap overflow-hidden text-overflow-ellipsis"
-            style="max-width: 150px">{{product.description}}</td>
-        <td>{{product.price}}</td>
+        <td>{{ product.title }}</td>
+        <td
+          class="white-space-nowrap overflow-hidden text-overflow-ellipsis"
+          style="max-width: 150px"
+        >
+          {{ product.description }}
+        </td>
+        <td>{{ product.price }}</td>
         <td class="text-center">
-          <p-button label="Remove"
-                    icon="pi pi-trash"
-                    styleClass="p-button-danger p-button-sm"
-                    (click)="onRemoveFromSelected(product.id)"></p-button>
+          <p-button
+            label="Remove"
+            icon="pi pi-trash"
+            styleClass="p-button-danger p-button-sm"
+            (click)="onRemoveFromSelected(product.id)"
+          ></p-button>
         </td>
       </tr>
     </ng-template>
   </p-table>
-  <p-confirmDialog icon="pi pi-exclamation-triangle"
-                   appendTo="body"
-                   key="deleteSelectedProductsDialog"></p-confirmDialog>
+  <p-confirmDialog
+    icon="pi pi-exclamation-triangle"
+    appendTo="body"
+    key="deleteSelectedProductsDialog"
+  ></p-confirmDialog>
 </ng-container>

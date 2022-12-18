@@ -1,4 +1,4 @@
-import {FormControl, Validators} from "@angular/forms";
+import {FormControl, Validators} from '@angular/forms';
 
 export interface IProductModalForm {
   title: FormControl<string | null>;
