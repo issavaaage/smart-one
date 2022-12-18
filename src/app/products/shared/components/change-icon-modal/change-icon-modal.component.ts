@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {IProduct} from "../../interfaces/product.interface";
 import {ImagesPathPipe} from "../../../../shared/pipes/images-path.pipe";
@@ -6,7 +6,8 @@ import {ImagesPathPipe} from "../../../../shared/pipes/images-path.pipe";
 @Component({
   selector: 'app-change-icon-modal',
   templateUrl: './change-icon-modal.component.html',
-  styleUrls: ['./change-icon-modal.component.scss']
+  styleUrls: ['./change-icon-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangeIconModalComponent implements OnInit {
 
@@ -15,7 +16,8 @@ export class ChangeIconModalComponent implements OnInit {
 
   constructor(public ref: DynamicDialogRef,
               public config: DynamicDialogConfig<{product?: IProduct}>,
-              private imagesPathPipe: ImagesPathPipe) { }
+              private imagesPathPipe: ImagesPathPipe,
+              private cdRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +28,7 @@ export class ChangeIconModalComponent implements OnInit {
 
     reader.onload = (event) => {
       this.imgPath = event.target?.result;
+      this.cdRef.detectChanges();
     }
 
     reader.readAsDataURL(this.file);

@@ -1,0 +1,63 @@
+:host {
+
+  .container {
+    padding: 0 30px;
+
+    @media screen and (max-width: 992px) {
+      padding: 0 16px;
+    }
+
+    @media screen and (max-width: 768px) {
+      padding: 0 24px;
+    }
+
+    @media screen and (max-width: 576px) {
+      padding: 0 18px;
+    }
+  }
+}
+
+::ng-deep {
+
+  .custom-table {
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    overflow: hidden;
+
+    tr {
+      th {
+        background-color: #EFF6FF!important;
+      }
+    }
+
+    .p-paginator-bottom {
+      border: none;
+    }
+  }
+
+  .custom-p-menu {
+    width: 100%;
+    border: none;
+
+    a {
+      outline: 1px solid #dee2e6;
+      border-radius: 6px!important;
+      margin-bottom: 8px!important;
+
+      &:hover {
+        background-color: rgba(#e9ecef, 0.3)!important;
+      }
+    }
+  }
+
+  .custom-add-product-modal {
+
+    .p-dialog-header {
+      padding: 1.5rem 2rem;
+    }
+
+    .p-dialog-content {
+      padding: 0 2rem 2rem;
+    }
+  }
+}

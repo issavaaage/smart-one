@@ -1,6 +1,7 @@
 <div class="flex mb-4">
   <p-button label="Product"
             class="ml-auto"
+            styleClass="p-button-sm"
             icon="pi pi-plus"
             iconPos="left"
             (click)="onAddProduct()"></p-button>
@@ -10,15 +11,23 @@
            [paginator]="true"
            [rows]="5"
            [rowsPerPageOptions]="rowsPerPageOptions"
-           [totalRecords]="products.length">
+           [totalRecords]="products.length"
+           styleClass="custom-table"
+           pAnimate
+           enterClass="fadein"
+           class="animation-duration-500">
     <ng-template pTemplate="header">
       <tr>
         <th>Image</th>
-        <th>Name</th>
-        <th style="max-width: 150px">Description</th>
-        <th>Price, $</th>
-        <th>Selected</th>
-        <th>Actions</th>
+        <ng-container *ngFor="let col of sortCols">
+          <th [style.max-w-10rem]="col.field === 'description'"
+              [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </ng-container>
+        <th class="text-center">Selected</th>
+        <th class="text-center">Actions</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-product>
@@ -30,31 +39,29 @@
         <td class="white-space-nowrap overflow-hidden text-overflow-ellipsis"
             style="max-width: 150px">{{product.description}}</td>
         <td>{{product.price}}</td>
-        <td>
+        <td class="text-center">
           <p-checkbox name="selectedProducts"
                       [value]="product.id"
                       [(ngModel)]="selectedProductsIds"
-                      (ngModelChange)="onChangeSelectedProducts()"></p-checkbox>
+                      (ngModelChange)="onChangeSelectedProducts(product.id)"></p-checkbox>
         </td>
-        <td>
+        <td class="text-center">
           <p-overlayPanel #op>
             <ng-template pTemplate>
               <p-button label="Edit"
                         icon="pi pi-file-edit"
                         class="mr-2"
+                        styleClass="p-button-sm"
                         (click)="onEditProduct(product)"></p-button>
               <p-button label="Change icon"
                         icon="pi pi-file-edit"
-                        styleClass="p-button-warning"
+                        styleClass="p-button-warning p-button-sm"
                         class="mr-2"
                         (click)="onChangeIcon(product)"></p-button>
               <p-button label="Delete"
                         icon="pi pi-trash"
-                        styleClass="p-button-danger"
+                        styleClass="p-button-danger p-button-sm"
                         (click)="onDeleteProduct(product.id)"></p-button>
-              <p-confirmDialog header="Delete"
-                               icon="pi pi-exclamation-triangle"
-                               appendTo="body"></p-confirmDialog>
             </ng-template>
           </p-overlayPanel>
 
@@ -65,4 +72,8 @@
       </tr>
     </ng-template>
   </p-table>
+  <p-confirmDialog icon="pi pi-exclamation-triangle"
+                   appendTo="body"
+                   key="deleteAllProductsDialog"></p-confirmDialog>
+  <p-toast></p-toast>
 </ng-container>

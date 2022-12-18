@@ -15,10 +15,14 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CheckboxModule} from "primeng/checkbox";
 import {OverlayPanelModule} from "primeng/overlaypanel";
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ConfirmationService} from 'primeng/api';
+import {ConfirmationService, MessageService} from 'primeng/api';
 import { ChangeIconModalComponent } from './shared/components/change-icon-modal/change-icon-modal.component';
 import {FileUploadModule} from "primeng/fileupload";
 import {AnimateModule} from "primeng/animate";
+import { ProductsComponent } from './products.component';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+import {ToastModule} from "primeng/toast";
 
 
 @NgModule({
@@ -26,7 +30,8 @@ import {AnimateModule} from "primeng/animate";
     ProductsAllComponent,
     ProductsSelectedComponent,
     AddProductModalComponent,
-    ChangeIconModalComponent
+    ChangeIconModalComponent,
+    ProductsComponent
   ],
   imports: [
     CommonModule,
@@ -42,11 +47,13 @@ import {AnimateModule} from "primeng/animate";
     OverlayPanelModule,
     ConfirmDialogModule,
     FileUploadModule,
-    AnimateModule
+    AnimateModule,
+    ToastModule
   ],
   providers: [
     ProductsService,
-    ConfirmationService
+    ConfirmationService,
+    MessageService
   ]
 })
 export class ProductsModule { }

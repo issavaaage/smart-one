@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {IProduct} from "../../interfaces/product.interface";
 import {IProductModalForm} from "../../interfaces/product-modal-form.interface";
@@ -7,7 +7,8 @@ import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 @Component({
   selector: 'app-add-product-modal',
   templateUrl: './add-product-modal.component.html',
-  styleUrls: ['./add-product-modal.component.scss']
+  styleUrls: ['./add-product-modal.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddProductModalComponent implements OnInit {
 
@@ -33,6 +34,13 @@ export class AddProductModalComponent implements OnInit {
   }
 
   submit() {
+    this.form.markAllAsTouched();
     if(this.form.valid) this.ref.close(this.form.value);
+  }
+
+  get isErrorShown() {
+    return !this.form.valid &&
+      Object.keys(this.form.controls).filter(key => this.form.get(key)?.touched).length
+      === Object.keys(this.form.controls).length;
   }
 }
