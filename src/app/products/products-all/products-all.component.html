@@ -6,7 +6,11 @@
             (click)="onAddProduct()"></p-button>
 </div>
 <ng-container *ngIf="(products$ | async) as products">
-  <p-table [value]="products">
+  <p-table [value]="products"
+           [paginator]="true"
+           [rows]="5"
+           [rowsPerPageOptions]="rowsPerPageOptions"
+           [totalRecords]="products.length">
     <ng-template pTemplate="header">
       <tr>
         <th>Image</th>
@@ -27,7 +31,10 @@
             style="max-width: 150px">{{product.description}}</td>
         <td>{{product.price}}</td>
         <td>
-          <p-checkbox name="selectedProducts" [value]="product.id" [(ngModel)]="selectedProducts"></p-checkbox>
+          <p-checkbox name="selectedProducts"
+                      [value]="product.id"
+                      [(ngModel)]="selectedProductsIds"
+                      (ngModelChange)="onChangeSelectedProducts()"></p-checkbox>
         </td>
         <td>
           <p-overlayPanel #op>

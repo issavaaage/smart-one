@@ -1,1 +1,26 @@
-<p>products-selected works!</p>
+<ng-container *ngIf="(products$ | async) as products">
+  <p-table [value]="products">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th style="max-width: 150px">Description</th>
+        <th>Price, $</th>
+        <th>Actions</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+      <tr pAnimate enterClass="fadein" class="animation-duration-1000">
+        <td>
+          <img src="{{product.image | imagespath}}" style="max-width: 50px" alt="">
+        </td>
+        <td>{{product.title}}</td>
+        <td class="white-space-nowrap overflow-hidden text-overflow-ellipsis"
+            style="max-width: 150px">{{product.description}}</td>
+        <td>{{product.price}}</td>
+        <td> -
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</ng-container>

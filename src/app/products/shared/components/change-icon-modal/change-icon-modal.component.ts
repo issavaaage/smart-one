@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {DynamicDialogConfig, DynamicDialogRef} from "primeng/dynamicdialog";
 import {IProduct} from "../../interfaces/product.interface";
+import {ImagesPathPipe} from "../../../../shared/pipes/images-path.pipe";
 
 @Component({
   selector: 'app-change-icon-modal',
@@ -10,30 +11,40 @@ import {IProduct} from "../../interfaces/product.interface";
 export class ChangeIconModalComponent implements OnInit {
 
   imgPath?: string | ArrayBuffer | null;
+  private file: File;
 
   constructor(public ref: DynamicDialogRef,
-              public config: DynamicDialogConfig<{product?: IProduct}>) { }
+              public config: DynamicDialogConfig<{product?: IProduct}>,
+              private imagesPathPipe: ImagesPathPipe) { }
 
   ngOnInit(): void {
   }
 
   onSelectFile(event: {currentFiles: Array<File>}) {
-    console.log(event);
-    const file = event.currentFiles[0]
+    this.file = event.currentFiles[0];
     const reader = new FileReader();
 
     reader.onload = (event) => {
       this.imgPath = event.target?.result;
     }
 
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(this.file);
   }
 
   get isShowImage() {
     return !!this.config.data?.product?.image || !!this.imgPath;
   }
 
+  get isSubmitDisabled() {
+    return !this.imgPath;
+  }
+
   get src() {
-    return this.config.data?.product?.image || this.imgPath;
+    const existedImg = this.config.data?.product?.image;
+    return this.imgPath? this.imgPath : (existedImg? this.imagesPathPipe.transform(existedImg) : '');
+  }
+
+  submit() {
+    if(!this.isSubmitDisabled) this.ref.close(this.file);
   }
 }

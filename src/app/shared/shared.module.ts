@@ -19,6 +19,7 @@ import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
   ],
   providers: [
     DialogService,
+    ImagesPathPipe
   ]
 })
 export class SharedModule { }

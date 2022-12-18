@@ -8,6 +8,6 @@ export class ImagesPathPipe implements PipeTransform {
   baseUrl: string = environment.imagesPath;
 
   transform(value: string): string {
-    return this.baseUrl + value;
+    return value? this.baseUrl + value : '';
   }
 }

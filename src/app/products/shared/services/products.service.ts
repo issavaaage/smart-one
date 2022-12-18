@@ -12,6 +12,8 @@ import {IAddProductImageResponse} from "../interfaces/add-product-image-response
 @Injectable()
 export class ProductsService {
 
+  private selectedProductsIdsKey = 'selectedProductsIds';
+
   private api = environment.apiUrl;
 
   private productsBS = new BehaviorSubject<Array<IProduct>>([]);
@@ -49,12 +51,24 @@ export class ProductsService {
       );
   }
 
-  addProductImage(id: number, file: FormData): Observable<IAddProductImageResponse> {
-    return this.http.post<IAddProductImageResponse>(`${this.api}/product/${id}/image`, file);
+  addProductImage(id: number, file: FormData): Observable<HttpResponse<IAddProductImageResponse>> {
+    return this.http.post<IAddProductImageResponse>(`${this.api}/product/${id}/image`, file, {observe: 'response'});
   }
 
   deleteProduct(id: number): Observable<HttpResponse<unknown>> {
     return this.http.delete(`${this.api}/product/${id}`, {observe: 'response'});
+  }
+
+  setSelectedProductsIds(ids: Array<number>) {
+    if(ids) {
+      localStorage.setItem(this.selectedProductsIdsKey, JSON.stringify(ids));
+    }
+  }
+
+  getSelectedProductsIds(): Array<number> | null {
+    const stringIds = localStorage.getItem(this.selectedProductsIdsKey);
+    if(!stringIds) return null;
+    return JSON.parse(stringIds);
   }
 
   private setProducts(products: Array<IProduct>) {

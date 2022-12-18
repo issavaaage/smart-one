@@ -9,7 +9,7 @@ import { ProductsService } from "./shared/services/products.service";
 import { HttpClientModule } from "@angular/common/http";
 import { SharedModule } from "../shared/shared.module";
 import { ButtonModule } from "primeng/button";
-import {DialogService, DynamicDialogModule} from "primeng/dynamicdialog";
+import {DynamicDialogModule} from "primeng/dynamicdialog";
 import { AddProductModalComponent } from './shared/components/add-product-modal/add-product-modal.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {CheckboxModule} from "primeng/checkbox";
@@ -18,6 +18,7 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
 import { ChangeIconModalComponent } from './shared/components/change-icon-modal/change-icon-modal.component';
 import {FileUploadModule} from "primeng/fileupload";
+import {AnimateModule} from "primeng/animate";
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import {FileUploadModule} from "primeng/fileupload";
     FormsModule,
     OverlayPanelModule,
     ConfirmDialogModule,
-    FileUploadModule
+    FileUploadModule,
+    AnimateModule
   ],
   providers: [
     ProductsService,

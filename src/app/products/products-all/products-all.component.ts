@@ -1,7 +1,7 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnDestroy, OnInit} from '@angular/core';
 import {IProduct} from "../shared/interfaces/product.interface";
 import {ProductsService} from "../shared/services/products.service";
-import {finalize, Observable, of, Subject, switchMap, takeUntil} from "rxjs";
+import {Observable, of, Subject, switchMap, takeUntil} from "rxjs";
 import {DialogService} from "primeng/dynamicdialog";
 import {AddProductModalComponent} from "../shared/components/add-product-modal/add-product-modal.component";
 import {ConfirmationService} from "primeng/api";
@@ -11,13 +11,16 @@ import {ChangeIconModalComponent} from "../shared/components/change-icon-modal/c
 @Component({
   selector: 'app-products-all',
   templateUrl: './products-all.component.html',
-  styleUrls: ['./products-all.component.scss']
+  styleUrls: ['./products-all.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductsAllComponent implements OnInit, OnDestroy {
 
+  rowsPerPageOptions = [5, 10, 20];
+
   products$: Observable<Array<IProduct>>;
 
-  selectedProducts: Array<number>;
+  selectedProductsIds: Array<number>;
 
   destroy$ = new Subject();
 
@@ -31,6 +34,8 @@ export class ProductsAllComponent implements OnInit, OnDestroy {
   }
 
   private loadData() {
+    this.selectedProductsIds = this.productsService.getSelectedProductsIds() ?? [];
+
     this.products$ = this.productsService.products$;
     this.products$
       .pipe(
@@ -93,9 +98,23 @@ export class ProductsAllComponent implements OnInit, OnDestroy {
 
   onChangeIcon(product: IProduct) {
     this.dialogService.open(ChangeIconModalComponent, {
-      header: 'Change Product icon'
+      header: 'Change Product icon',
+      data: {
+        product
+      }
     }).onClose
       .pipe(
+        switchMap(res => {
+          if(!res) return of(null);
+            this.loaderService.setLoading(true);
+            const formData = new FormData();
+            formData.append('file', res);
+            return this.productsService.addProductImage(product.id as number, formData);
+        }),
+        switchMap(res => {
+          if(res?.status !== 200) return of(null);
+            return this.productsService.getProducts();
+        }),
         takeUntil(this.destroy$)
       )
       .subscribe();
@@ -117,6 +136,10 @@ export class ProductsAllComponent implements OnInit, OnDestroy {
           .subscribe();
       }
     })
+  }
+
+  onChangeSelectedProducts() {
+    this.productsService.setSelectedProductsIds(this.selectedProductsIds);
   }
 
   ngOnDestroy() {

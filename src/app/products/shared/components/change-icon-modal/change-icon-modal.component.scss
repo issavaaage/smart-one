@@ -1,14 +1,17 @@
 :host {
   .custom-image-preview {
     height: 200px;
+    display: flex;
+    justify-content: center;
 
     img {
       max-height: 100%;
     }
 
     .image-placeholder {
-      background: darkgrey;
+      background-color: var(--surface-ground);
       height: 100%;
+      width: 100%;
     }
   }
 }
